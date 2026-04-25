@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una Sorpresa para Ti ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffc0a3 0%, #ffece3 99%, #fff8f5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Contenedor Inicial */
+        #login-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 140, 105, 0.2);
+            text-align: center;
+            z-index: 10;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            max-width: 90%;
+            width: 400px;
+            backdrop-filter: blur(10px);
+        }
+
+        #login-container h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff8c69;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        #login-container p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ffc0a3;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            text-align: center;
+            outline: none;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #ff8c69;
+        }
+
+        button {
+            background: #ff8c69;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 140, 105, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 140, 105, 0.6);
+            background: #ff754d;
+        }
+
+        /* Contenedor de la Sorpresa */
+        #surprise-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        #surprise-container h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #fff;
+            font-size: 4rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+            margin-bottom: 10px;
+            animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #surprise-container h2 {
+            color: #fff;
+            font-weight: 300;
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1000px;
+            margin-bottom: 50px;
+        }
+
+        .polaroid {
+            background: #fff;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+            transform: rotate(-5deg);
+            transition: transform 0.4s, box-shadow 0.4s;
+            animation: fadeInPolaroid 1s both;
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(4deg);
+        }
+
+        .polaroid:hover {
+            transform: scale(1.1) rotate(0deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            z-index: 20;
+        }
+
+        .polaroid img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+
+        .polaroid p {
+            font-family: 'Dancing Script', cursive;
+            color: #333;
+            font-size: 1.5rem;
+            margin: 15px 0 0 0;
+            text-align: center;
+        }
+
+        /* Animaciones */
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInPolaroid {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) rotate(-10deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Corazones flotantes */
+        .heart {
+            position: absolute;
+            top: -10vh;
+            font-size: 2rem;
+            color: rgba(255, 140, 105, 0.7);
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        /* Optimizaciones para Móviles */
+        @media (max-width: 768px) {
+            #login-container {
+                padding: 30px 20px;
+            }
+
+            #login-container h1 {
+                font-size: 2.5rem;
+            }
+
+            #surprise-container {
+                padding: 40px 10px 20px 10px;
+                justify-content: flex-start;
+                /* Evita que el contenido se corte arriba si es muy largo */
+            }
+
+            #surprise-container h1 {
+                font-size: 2.8rem;
+                margin-top: 20px;
+            }
+
+            #surprise-container h2 {
+                font-size: 1.2rem;
+                padding: 0 10px;
+                margin-bottom: 25px;
+            }
+
+            .gallery {
+                gap: 20px;
+            }
+
+            .polaroid {
+                padding: 12px 12px 30px 12px;
+                transform: rotate(0deg) !important;
+                /* Más recto en móvil para ahorrar espacio */
+                margin-bottom: 10px;
+            }
+
+            .polaroid:hover {
+                transform: scale(1.05) rotate(0deg) !important;
+            }
+
+            .polaroid img {
+                width: 230px;
+                height: 230px;
+            }
+
+            .polaroid p {
+                font-size: 1.3rem;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="login-container">
+        <h1>Para Diana...</h1>
+        <p>He preparado un pequeño detalle para celebrar...</p>
+        <button onclick="openSurprise()" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+            Descubrir Sorpresa 
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                <rect width="20" height="5" x="2" y="7" rx="1" ry="1"></rect>
+                <line x1="12" x2="12" y1="22" y2="7"></line>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div id="surprise-container">
+        <h1 id="greetingMsg">¡Feliz Primera Semana Baby!</h1>
+        <h2>Un fin de semana increíble a tu lado, y vamos por más. ❤️</h2>
+
+        <div class="gallery">
+            <div class="polaroid" style="animation-delay: 0.5s;">
+                <img src="assets/media/dp_1.jpg" alt="Recuerdo 1">
+                <p>Primera Aventura juntos</p>
+            </div>
+            <div class="polaroid" style="animation-delay: 0.8s;">
+                <img src="assets/media/dp_2.jpg" alt="Recuerdo 2">
+                <p>Despertando a tu lado</p>
+            </div>
+
+        </div>
+
+        <div class="romantic-quote"
+            style="animation: popIn 1s ease-in 1.5s both; margin-top: 10px; margin-bottom: 50px; text-align: center; max-width: 600px; padding: 0 20px;">
+            <p
+                style="font-family: 'Dancing Script', cursive; color: #d15847; font-size: 2.2rem; margin-bottom: 5px; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">
+                "Víveme sin miedo ahora, que sea una vida o sea una hora..."</p>
+            <span style="color: #e06350; font-size: 1.1rem; font-weight: 400;">— Laura Pausini</span>
+        </div>
+    </div>
+
+    <script>
+        function openSurprise() {
+            // Ocultar login
+            const login = document.getElementById('login-container');
+            login.style.transform = 'scale(0.8)';
+            login.style.opacity = '0';
+
+            setTimeout(() => {
+                login.style.display = 'none';
+
+                const surprise = document.getElementById('surprise-container');
+                surprise.style.display = 'flex';
+                // Pequeño delay para asegurar que el display flex se aplicó antes de la opacidad
+                setTimeout(() => {
+                    surprise.style.opacity = '1';
+                    startHearts();
+                }, 50);
+            }, 500);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+
+            // Posición aleatoria
+            heart.style.left = Math.random() * 100 + 'vw';
+
+            // Tamaño aleatorio
+            const size = Math.random() * 1.5 + 0.5;
+            heart.style.fontSize = size + 'rem';
+
+            // Duración aleatoria
+            const duration = Math.random() * 3 + 4;
+            heart.style.animationDuration = duration + 's';
+
+            document.body.appendChild(heart);
+
+            // Eliminar después de caer
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        function startHearts() {
+            // Crear corazones periódicamente
+            setInterval(createHeart, 300);
+
+            // Crear una explosión inicial de corazones
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createHeart, Math.random() * 1000);
+            }
+        }
+    </script>
+</body>
+
+</html>

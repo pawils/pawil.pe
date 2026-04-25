@@ -1,0 +1,19 @@
+Git pull: para actualizar cambios
+Git add . : para cargar todo
+git commit -m "Revisando la carga"
+git push -u origin master
+
+-------
+
+Tigre1824@@
+
+Turismo vivencial
+
+
+
+Silvana Paula Najarro Peralta
+ 11 CUMPLE DE Giuseppe
+Ux y ui
+y monetizar una web
+
+
